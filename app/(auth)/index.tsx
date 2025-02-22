@@ -1,11 +1,10 @@
 // app/index.tsx
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, TouchableOpacity, StyleSheet } from 'react-native';
-import { registerUser, handleGoogleSignInCallback } from '../src/services/api';
+import { registerUser, handleGoogleSignInCallback } from '../../src/services/api';
 import { useRouter } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
-import { Ionicons } from '@expo/vector-icons';
 import Constants from 'expo-constants';
 
 WebBrowser.maybeCompleteAuthSession();
@@ -55,7 +54,7 @@ export default function CreateAccountScreen() {
                 formData.password2
             );
             if (response?.access) {
-                router.replace('/(tabs)'); 
+                router.replace('/(tabs)');
             }
         } catch (err: any) {
             console.error(err);
