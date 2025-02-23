@@ -17,7 +17,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.hovtex.recipe"
+      "package": "com.hovtec.recipe"
     },
     "web": {
       "bundler": "metro",

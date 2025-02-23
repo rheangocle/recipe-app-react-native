@@ -7,7 +7,7 @@ import {
     GoogleSSOResponse,
 } from '../types/api';
 
-// const BASE_API_URL = 'http://localhost:8000/api';
+// const BASE_API_URL = 'http://10.0.2.2:8000';
 const BASE_API_URL = 'http://127.0.0.1:8000'; // For Android emulator
 
 export async function registerUser(
@@ -26,7 +26,7 @@ export async function handleGoogleSignInCallback(
     token: string
 ): Promise<GoogleSSOResponse> {
     try {
-        const response = await axios.post<GoogleSSOResponse>(`${BASE_API_URL}/auth/google/login/`, {
+        const response = await axios.post<GoogleSSOResponse>(`${BASE_API_URL}/auth/google/login/callback/`, {
             access_token: token
         });
         return response.data;
@@ -42,9 +42,9 @@ export async function updateUserProfile(
     try {
         const response = await axios.post<ProfileResponse>(`${BASE_API_URL}/api/profile/`, profileData);
         return response.data;
-      } catch (error) {
+    } catch (error) {
         console.error('Error updating profile:', error);
         throw error;
-      }
+    }
 }
 
