@@ -1,5 +1,5 @@
 // app/index.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, TouchableOpacity, StyleSheet } from 'react-native';
 import { registerUser, handleGoogleSignInCallback } from '../../src/services/api';
 import { useRouter } from 'expo-router';
@@ -32,28 +32,37 @@ export default function CreateAccountScreen() {
         clientId: webGoogleClientId,
     });
 
-    const handleGoogleSignIn = async () => {
-        try {
-            const result = await promptAsync();
-            if (result?.type === 'success' && result.authentication) {
-                const token = result.authentication.accessToken;
-                const userData = await handleGoogleSignInCallback(token);
+    useEffect(() => {
+        async function handleGoogleSignIn() {
+            if (!response) return;
+
+            if (response.type !== 'success') {
+                console.error('Google sign-in not successful:', error);
+                return;
             }
-        } catch (error) {
-            console.error('Google Sign in error:', error);
+
+            const token = response.authentication?.accessToken;
+            if (!token) {
+                return;
+            }
+
+            try {
+                const userData = await handleGoogleSignInCallback(token);
+                console.log("Google sso success");
+                router.replace('/(tabs)');
+            } catch (error) {
+                setError('Google Sign-in failed. Please try again.');
+            }
         }
-    };
+        handleGoogleSignIn();
+    }, [response]);
 
     const handleSignup = async () => {
         try {
             setError(null);
-            const response = await registerUser(
-                formData.username,
-                formData.email,
-                formData.password1,
-                formData.password2
-            );
-            if (response?.access) {
+
+            const response = await registerUser(formData);
+            if (response) {
                 router.replace('/(tabs)');
             }
         } catch (err: any) {
@@ -116,7 +125,7 @@ export default function CreateAccountScreen() {
                     borderRadius: 8,
                     alignItems: 'center',
                 }}
-                onPress={handleGoogleSignIn}
+                onPress={() => promptAsync()}
                 disabled={!request}
             >
                 <Text style={{ color: '#fff', fontWeight: 'bold' }}>

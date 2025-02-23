@@ -5,8 +5,12 @@ export default function AuthLayout() {
   return (
     <Stack>
       <Stack.Screen
-        name="register"
+        name="index"
         options={{ title: 'Register' }}
+      />
+      <Stack.Screen
+        name="login"
+        options={{ title: 'Login' }}
       />
       <Stack.Screen
         name="profile-setup"
