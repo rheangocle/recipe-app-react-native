@@ -64,63 +64,64 @@ export default function ProfileSetupScreen() {
                         </TextInput>
                     </View>
                 )}
-            </View>
 
-            {step === 2 && (
-                <View style={styles.stepContainer}>
-                    <Text variant='headlineSmall' style={styles.title}>
-                        2. Add Any Dietary Restrictions
-                    </Text>
-                    <TextInput
-                        label='Dietary Restrictions'
-                        mode='outlined'
-                        placeholder='Lactose intolerant, no gluten, etc.'
-                        value={profileData.dietary_restrictions}
-                        onChangeText={(text) =>
-                            setProfileData((prev) => ({ ...prev, dietary_restrictions: text }))
-                        }
-                        style={styles.input}
-                    >
-                    </TextInput>
-                </View>
-            )}
 
-            {step === 3 && (
-                <View style={styles.stepContainer}>
-                    <Text variant='headlineSmall' style={styles.title}>
-                        3. Do you have any food preferences?
-                    </Text>
-                    <TextInput
-                        label='Food Preferences'
-                        mode='outlined'
-                        placeholder='Spicy food, low-carb, etc.'
-                        value={profileData.preferences}
-                        onChangeText={(text) =>
-                            setProfileData((prev) => ({ ...prev, preferences: text }))
-                        }
-                        style={styles.input}
-                    >
-                    </TextInput>
-                </View>
-            )}
-
-            {error ? <Text style={styles.error}>{error}</Text> : null}
-
-            <View style={styles.buttonContainer}>
-                {step > 1 && (
-                    <Button mode="outlined" onPress={handleBack} style={styles.button}>
-                        Back
-                    </Button>
+                {step === 2 && (
+                    <View style={styles.stepContainer}>
+                        <Text variant='headlineSmall' style={styles.title}>
+                            2. Add Any Dietary Restrictions
+                        </Text>
+                        <TextInput
+                            label='Dietary Restrictions'
+                            mode='outlined'
+                            placeholder='Lactose intolerant, no gluten, etc.'
+                            value={profileData.dietary_restrictions}
+                            onChangeText={(text) =>
+                                setProfileData((prev) => ({ ...prev, dietary_restrictions: text }))
+                            }
+                            style={styles.input}
+                        >
+                        </TextInput>
+                    </View>
                 )}
-                <Button
-                    mode="contained"
-                    onPress={handleNext}
-                    loading={loading}
-                    disabled={loading}
-                    style={styles.button}
-                >
-                    {step === 3 ? 'Submit' : 'Next'}
-                </Button>
+
+                {step === 3 && (
+                    <View style={styles.stepContainer}>
+                        <Text variant='headlineSmall' style={styles.title}>
+                            3. Do you have any food preferences?
+                        </Text>
+                        <TextInput
+                            label='Food Preferences'
+                            mode='outlined'
+                            placeholder='Spicy food, low-carb, etc.'
+                            value={profileData.preferences}
+                            onChangeText={(text) =>
+                                setProfileData((prev) => ({ ...prev, preferences: text }))
+                            }
+                            style={styles.input}
+                        >
+                        </TextInput>
+                    </View>
+                )}
+
+                {error ? <Text style={styles.error}>{error}</Text> : null}
+
+                <View style={styles.buttonContainer}>
+                    {step > 1 && (
+                        <Button mode="outlined" onPress={handleBack} style={styles.button}>
+                            Back
+                        </Button>
+                    )}
+                    <Button
+                        mode="contained"
+                        onPress={handleNext}
+                        loading={loading}
+                        disabled={loading}
+                        style={styles.button}
+                    >
+                        {step === 3 ? 'Submit' : 'Next'}
+                    </Button>
+                </View>
             </View>
         </PaperProvider>
     )
