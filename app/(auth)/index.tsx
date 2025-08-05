@@ -148,6 +148,14 @@ export default function CreateAccountScreen() {
                         Sign in with Google
                     </Text>
                 </TouchableOpacity>
+
+                <Button
+                    mode="text"
+                    onPress={() => router.push('/(auth)/login')}
+                    style={{marginTop: 20}}
+                >
+                    Already have an account? Login
+                </Button>
             </View>
         </PaperProvider>
     );

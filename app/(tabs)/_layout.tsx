@@ -27,26 +27,33 @@ export default function TabLayout() {
         }),
       }}>
       <Tabs.Screen
-        name="index"
+        name="default"
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
         }}
       />
-       <Tabs.Screen  
-        name="settings"  
-        options={{  
-          title: 'Settings',  
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="cog" color={color} />,
-        }}  
-      />  
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="search" color={color} />,
+          title: 'Recipes',
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="book" color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="generate"
+        options={{
+          title: 'Generate',
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="magic" color={color} />,
+        }}
+      />
+      <Tabs.Screen  
+        name="settings"  
+        options={{  
+          title: 'Profile',  
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="user" color={color} />,
+        }}  
+      />  
     </Tabs>
   );
 }
