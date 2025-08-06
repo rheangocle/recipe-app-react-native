@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
     RegisterResponse,
     RegisterRequest,
+    LoginResponse,
     ProfileRequest,
     ProfileResponse,
     GoogleSSOResponse,
@@ -116,16 +117,17 @@ export async function handleGoogleSignInCallback(
 export async function loginUser(
     email: string,
     password: string
-): Promise<GoogleSSOResponse> {
+): Promise<LoginResponse> {
     try {
-        const response = await api.post<GoogleSSOResponse>('/auth/login/', {
+        console.log("Attempting to login with email:", email);
+        const response = await api.post<LoginResponse>('/auth/login/', {
             email,
             password
         });
         console.log("Login response:", response.data);
         
-        if (response.data.token) {
-            await setAuthToken(response.data.token);
+        if (response.data.access) {
+            await setAuthToken(response.data.access);
         }
         
         return response.data;

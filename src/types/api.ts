@@ -4,12 +4,18 @@ export interface RegisterRequest {
     password: string;
 }
 
-
 export interface RegisterResponse {
-    access: RegisterResponse;
+    access: string;
+    refresh: string;
     id: number;
-    username: string;
     email: string
+}
+
+export interface LoginResponse {
+    access: string;
+    refresh: string;
+    id: number;
+    email: string;
 }
 
 export interface ProfileRequest {

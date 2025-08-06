@@ -21,10 +21,16 @@ export default function LoginScreen() {
             setLoading(true);
             setError('');
             const response = await loginUser(email, password);
-            router.replace('/(tabs)');
+            router.replace('/(tabs)/default');
         } catch (err: any) {
             console.error('Login error:', err);
-            setError(err.response?.data?.detail || 'Login failed');
+            // Try to extract error message from different possible locations
+            const errorMessage = err.response?.data?.detail || 
+                               err.response?.data?.message || 
+                               err.response?.data?.error ||
+                               err.message || 
+                               'Login failed';
+            setError(errorMessage);
         } finally {
             setLoading(false);
         }

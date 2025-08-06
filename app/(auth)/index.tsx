@@ -8,16 +8,15 @@ import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
 import * as AuthSession from 'expo-auth-session';
 import Constants from 'expo-constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 WebBrowser.maybeCompleteAuthSession();
 
 export default function CreateAccountScreen() {
     const router = useRouter();
     const [formData, setFormData] = useState({
-        username: '',
         email: '',
-        password1: '',
-        password2: '',
+        password: '',
     });
 
     const [error, setError] = useState<string | null>(null);
@@ -39,9 +38,7 @@ export default function CreateAccountScreen() {
             androidClientId: androidGoogleClientId,
             iosClientId: iosGoogleClientId,
             webClientId: webGoogleClientId,
-            redirectUri: AuthSession.makeRedirectUri({
-                scheme: 'myapp'
-            }),
+            redirectUri,
             scopes: ['profile', 'email']
         }
     );
@@ -51,13 +48,13 @@ export default function CreateAccountScreen() {
             if (!response) return;
 
             if (response.type !== 'success') {
-                console.error('Google sign-in not successful:', error);
+                console.error('Google sign-in not successful:', response.type);
                 return;
             }
 
             const token = response.authentication?.accessToken;
             if (!token) {
-                console.error('Google sign-in issue with token:', error);
+                console.error('Google sign-in issue with token');
                 return;
             }
 
@@ -76,7 +73,23 @@ export default function CreateAccountScreen() {
         try {
             setError(null);
 
-            const response = await registerUser(formData);
+            // Basic validation
+            if (!formData.email || !formData.password) {
+                setError('Please enter both email and password');
+                return;
+            }
+
+            if (formData.password.length < 6) {
+                setError('Password must be at least 6 characters long');
+                return;
+            }
+
+            const signupData = {
+                email: formData.email,
+                password: formData.password,
+            };
+
+            const response = await registerUser(signupData);
             if (response) {
                 router.replace('/(auth)/profile-setup');
             }
@@ -97,17 +110,10 @@ export default function CreateAccountScreen() {
                 </Text>
                 {error && (
                     <Text style={styles.error}>
-                        {typeof error === 'string' ? error : JSON.stringify(error)}
+                        {error}
                     </Text>
                 )}
-                <TextInput
-                    placeholder='Username'
-                    value={formData.username}
-                    onChangeText={(text) =>
-                        setFormData((prev) => ({ ...prev, username: text }))
-                    }
-                    style={styles.input}
-                />
+                
                 <TextInput
                     placeholder='Email'
                     value={formData.email}
@@ -115,21 +121,14 @@ export default function CreateAccountScreen() {
                         setFormData((prev) => ({ ...prev, email: text }))
                     }
                     style={styles.input}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
                 />
                 <TextInput
                     placeholder='Password'
-                    value={formData.password1}
+                    value={formData.password}
                     onChangeText={(text) =>
-                        setFormData((prev) => ({ ...prev, password1: text }))
-                    }
-                    secureTextEntry
-                    style={styles.input}
-                />
-                <TextInput
-                    placeholder='Re-enter your password'
-                    value={formData.password2}
-                    onChangeText={(text) =>
-                        setFormData((prev) => ({ ...prev, password2: text }))
+                        setFormData((prev) => ({ ...prev, password: text }))
                     }
                     secureTextEntry
                     style={styles.input}
@@ -226,5 +225,14 @@ const styles = StyleSheet.create({
     },
     linkButton: {
         marginTop: 8,
+    },
+    nameContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 12,
+    },
+    nameInput: {
+        flex: 1,
+        marginRight: 8,
     },
 });

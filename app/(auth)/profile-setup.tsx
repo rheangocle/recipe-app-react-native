@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, Button, TextInput } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { updateUserProfile } from '../../src/services/api';
 import { ProfileRequest } from '@/src/types/api';
 import { useAuth } from '../../src/contexts/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ProfileSetupScreen() {
     const router = useRouter();
@@ -31,7 +32,7 @@ export default function ProfileSetupScreen() {
                 console.log('profile data updated:', response);
 
                 // Navigate to the main app
-                router.replace('/(tabs)');
+                router.replace('/(tabs)/default');
             } catch (error) {
                 console.error('Error updating profile:', error);
                 setError('There was an error updating your profile.');
@@ -151,5 +152,15 @@ const styles = StyleSheet.create({
     },
     button: {
         marginHorizontal: 5,
+    },
+    welcomeContainer: {
+        marginBottom: 20,
+        alignItems: 'center',
+    },
+    welcomeText: {
+        marginBottom: 5,
+    },
+    subtitleText: {
+        textAlign: 'center',
     },
 });
