@@ -57,13 +57,13 @@ export default function CreateAccountScreen() {
 
             const token = response.authentication?.accessToken;
             if (!token) {
-                console.error('Google sigin in issue with token:', error);
+                console.error('Google sign-in issue with token:', error);
                 return;
             }
 
             try {
                 const userData = await handleGoogleSignInCallback(token);
-                console.log("Google sso success");
+                console.log("Google sso success", userData);
                 router.replace('/(auth)/profile-setup');
             } catch (error) {
                 setError('Google Sign-in failed. Please try again.');
@@ -88,16 +88,25 @@ export default function CreateAccountScreen() {
 
     return (
         <PaperProvider>
-            <View style={{ padding: 16 }}>
-                <Text>Create Account</Text>
-                {error && <Text style={{ color: 'red' }}>{JSON.stringify(error)}</Text>}
+            <View style={styles.container}>
+                <Text
+                    variant="headlineMedium"
+                    style={styles.title}
+                >
+                    Create Account
+                </Text>
+                {error && (
+                    <Text style={styles.error}>
+                        {typeof error === 'string' ? error : JSON.stringify(error)}
+                    </Text>
+                )}
                 <TextInput
                     placeholder='Username'
                     value={formData.username}
                     onChangeText={(text) =>
                         setFormData((prev) => ({ ...prev, username: text }))
                     }
-                    style={{ borderColor: '#ccc', borderWidth: 1, marginBottom: 8 }}
+                    style={styles.input}
                 />
                 <TextInput
                     placeholder='Email'
@@ -105,7 +114,7 @@ export default function CreateAccountScreen() {
                     onChangeText={(text) =>
                         setFormData((prev) => ({ ...prev, email: text }))
                     }
-                    style={{ borderColor: '#ccc', borderWidth: 1, marginBottom: 8 }}
+                    style={styles.input}
                 />
                 <TextInput
                     placeholder='Password'
@@ -114,7 +123,7 @@ export default function CreateAccountScreen() {
                         setFormData((prev) => ({ ...prev, password1: text }))
                     }
                     secureTextEntry
-                    style={{ borderColor: '#ccc', borderWidth: 1, marginBottom: 8 }}
+                    style={styles.input}
                 />
                 <TextInput
                     placeholder='Re-enter your password'
@@ -123,28 +132,29 @@ export default function CreateAccountScreen() {
                         setFormData((prev) => ({ ...prev, password2: text }))
                     }
                     secureTextEntry
-                    style={{ borderColor: '#ccc', borderWidth: 1, marginBottom: 8 }}
+                    style={styles.input}
                 />
 
-                <Button mode='contained' onPress={handleSignup}>Sign Up</Button>
+                <Button 
+                mode='contained' 
+                onPress={handleSignup}
+                style={styles.button}
+                >
+                    Sign Up
+                </Button>
 
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 20 }}>
-                    <View style={{ flex: 1, height: 1, backgroundColor: '#ccc' }} />
-                    <Text style={{ marginHorizontal: 10 }}>OR</Text>
-                    <View style={{ flex: 1, height: 1, backgroundColor: '#ccc' }} />
+                <View style={styles.divider}>
+                    <View style={styles.dividerLine} />
+                    <Text style={styles.dividerText}>OR</Text>
+                    <View style={styles.dividerLine} />
                 </View>
 
                 <TouchableOpacity
-                    style={{
-                        backgroundColor: '#4285F4',
-                        padding: 14,
-                        borderRadius: 8,
-                        alignItems: 'center',
-                    }}
+                    style={styles.googleButton}
                     onPress={() => promptAsync()}
                     disabled={!request}
                 >
-                    <Text style={{ color: '#fff', fontWeight: 'bold' }}>
+                    <Text style={styles.googleButtonText}>
                         Sign in with Google
                     </Text>
                 </TouchableOpacity>
@@ -152,7 +162,7 @@ export default function CreateAccountScreen() {
                 <Button
                     mode="text"
                     onPress={() => router.push('/(auth)/login')}
-                    style={{marginTop: 20}}
+                    style={styles.linkButton}
                 >
                     Already have an account? Login
                 </Button>
@@ -160,3 +170,61 @@ export default function CreateAccountScreen() {
         </PaperProvider>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 16,
+        justifyContent: 'center',
+    },
+    title: {
+        textAlign: 'center',
+        marginBottom: 24,
+    },
+    error: {
+        color: 'red',
+        textAlign: 'center',
+        marginBottom: 16,
+        padding: 8,
+        backgroundColor: '#ffebee',
+        borderRadius: 4,
+    },
+    input: {
+        borderColor: '#ccc',
+        borderWidth: 1,
+        marginBottom: 12,
+        padding: 12,
+        borderRadius: 4,
+    },
+    button: {
+        marginBottom: 16,
+    },
+    divider: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 20,
+    },
+    dividerLine: {
+        flex: 1,
+        height: 1,
+        backgroundColor: '#ccc',
+    },
+    dividerText: {
+        marginHorizontal: 10,
+        color: '#666',
+    },
+    googleButton: {
+        backgroundColor: '#4285F4',
+        padding: 14,
+        borderRadius: 8,
+        alignItems: 'center',
+        marginBottom: 16,
+    },
+    googleButtonText: {
+        color: '#fff',
+        fontWeight: 'bold',
+    },
+    linkButton: {
+        marginTop: 8,
+    },
+});

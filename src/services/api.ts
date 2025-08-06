@@ -75,6 +75,17 @@ export async function registerUser(
 ): Promise<RegisterResponse> {
     try {
         const response = await api.post<RegisterResponse>('/auth/registration/', registerData);
+        console.log("Register response:", response.data);
+
+        if (response.data && response.data.access) {
+            await setAuthToken(response.data.access);
+            api.defaults.headers.common['Authorization'] = `Bearer ${response.data.access}`;
+        }
+
+        if ('refresh' in response.data && response.data.refresh) {
+            await AsyncStorage.setItem('refreshToken', response.data.refresh);
+        }
+
         return response.data;
     } catch (error) {
         console.error('Error registering user:', error);
@@ -111,6 +122,7 @@ export async function loginUser(
             email,
             password
         });
+        console.log("Login response:", response.data);
         
         if (response.data.token) {
             await setAuthToken(response.data.token);
