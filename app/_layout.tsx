@@ -34,19 +34,17 @@ export default function RootLayout() {
       <AuthProvider>
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
           <Stack initialRouteName="(auth)">
-            <Stack>
-              <Stack.Screen
-                name="(auth)"
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-              <Stack.Screen name="+not-found" />
-              <Stack.Screen name="recipe/[id]" options={{ headerShown: false }} />
-              <Stack.Screen name="generate-recipe" options={{ headerShown: false }} />
-              <Stack.Screen name="shopping-list" options={{ headerShown: false }} />
-            </Stack>
+            <Stack.Screen
+              name="(auth)"
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+            <Stack.Screen name="recipe/[id]" options={{ headerShown: false }} />
+            <Stack.Screen name="generate-recipe" options={{ headerShown: false }} />
+            <Stack.Screen name="shopping-list" options={{ headerShown: false }} />
           </Stack>
           <StatusBar style="auto" />
         </ThemeProvider>

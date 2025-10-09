@@ -18,18 +18,56 @@ export interface LoginResponse {
     email: string;
 }
 
+export interface DietType {
+    id: number;
+    name: string;
+    description: string;
+}
+
+export interface DietaryRestriction {
+    id: number;
+    name: string;
+    description: string;
+}
+
+export interface Category {
+    id: number;
+    name: string;
+    description?: string;
+}
+
+export interface Unit {
+    id: number;
+    name: string;
+    unit_type: 'weight' | 'volume' | 'count';
+}
+
+export interface FodmapCategory {
+    id: number;
+    name: string;
+    description?: string;
+}
+
+export interface FoodPreference {
+    id: number;
+    ingredient: Ingredient;
+    ingredient_id?: number;
+    preference: 'like' | 'dislike' | 'neutral' | 'allergic';
+}
+
 export interface ProfileRequest {
-    diet_type: string;
-    dietary_restrictions: string;
-    preferences: string
+    diet_type_ids: number[];
+    dietary_restriction_ids: number[];
 }
 
 export interface ProfileResponse {
     id: number;
     user: number;
-    diet_type: string;
-    dietary_restrictions: string;
-    preferences: string
+    diet_types: DietType[];
+    dietary_restrictions: DietaryRestriction[];
+    food_preferences: FoodPreference[];
+    created_at: string;
+    updated_at: string;
 }
 
 export interface GoogleSSOResponse {
@@ -49,43 +87,51 @@ export interface Recipe {
     instructions: string;
     prep_time: number;
     cook_time: number;
+    total_time: number;
     servings: number;
-    difficulty: 'easy' | 'medium' | 'hard';
-    image_url?: string;
-    is_fodmap_friendly: boolean;
+    cuisine?: string;
+    image?: string;
+    fodmap_friendly: boolean;
     fodmap_notes?: string;
-    created_by: number;
+    created_by?: number;
     created_at: string;
     updated_at: string;
-    ingredients: RecipeIngredient[];
-    tags: string[];
+    ingredients_detail: RecipeIngredient[];
+    tags: Tag[];
+    tag_ids?: number[];
 }
 
 export interface RecipeIngredient {
     id: number;
     ingredient: Ingredient;
-    quantity: number;
-    unit: string;
+    quantity: string;
+    unit: Unit | null;
     notes?: string;
 }
 
 export interface Ingredient {
     id: number;
     name: string;
-    category: string;
-    fodmap_level: 'low' | 'medium' | 'high';
-    fodmap_notes?: string;
+    category: Category | null;
+    default_unit: Unit | null;
+    fodmap_category: FodmapCategory | null;
+    nutritional_info?: any;
+}
+
+export interface Tag {
+    id: number;
+    name: string;
+    description?: string;
 }
 
 export interface UserProfile {
     id: number;
     user: number;
-    diet_type: string;
-    dietary_restrictions: string[];
-    preferences: string[];
-    liked_ingredients: number[];
-    disliked_ingredients: number[];
-    allergic_ingredients: number[];
+    diet_types: DietType[];
+    dietary_restrictions: DietaryRestriction[];
+    food_preferences: FoodPreference[];
+    created_at: string;
+    updated_at: string;
 }
 
 export interface RecipeGenerationRequest {

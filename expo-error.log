@@ -1,0 +1,194 @@
+env: load .env
+env: export ANDROID_GOOGLE_CLIENT_ID IOS_GOOGLE_CLIENT_ID WEB_GOOGLE_CLIENT_ID
+Starting project at /mnt/c/Users/rhean/Documents/recipe-app
+Starting Metro Bundler
+warning: Bundler cache is empty, rebuilding (this may take a minute)
+The following packages should be updated for best compatibility with the installed expo version:
+  expo-router@5.1.4 - expected version: ~5.1.7
+  expo-system-ui@5.0.10 - expected version: ~5.0.11
+  expo@53.0.20 - expected version: ~53.0.23
+  jest-expo@53.0.9 - expected version: ~53.0.10
+Your project may not work correctly until you install the expected versions of the packages.
+Waiting on http://localhost:8081
+Logs for your project will appear below.
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+λ node_modules/expo-router/node/render.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+| expo-router/babel is deprecated in favor of babel-preset-expo in SDK 50. To fix the issue, remove "expo-router/babel" from "plugins" in your babel.config.js file.
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+λ node_modules/expo-router/node/render.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+| expo-router/babel is deprecated in favor of babel-preset-expo in SDK 50. To fix the issue, remove "expo-router/babel" from "plugins" in your babel.config.js file.
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓░░░░░░░░░ 46.5% (15/22)
+λ node_modules/expo-router/node/render.js ▓▓▓▓░░░░░░░░░░░░ 30.0% ( 43/102)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓░░░░░░ 63.3% (37/47)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓░░░░░░░░░░ 41.7% (112/178)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓░░░░░░ 65.5% (51/63)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓░░░░░░ 65.5% (163/229)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 82.1% (61/68)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓░░░░░░ 65.5% (196/280)
+| expo-router/babel is deprecated in favor of babel-preset-expo in SDK 50. To fix the issue, remove "expo-router/babel" from "plugins" in your babel.config.js file.
+| expo-router/babel is deprecated in favor of babel-preset-expo in SDK 50. To fix the issue, remove "expo-router/babel" from "plugins" in your babel.config.js file.
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 82.1% (62/77)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓░░░░░░ 65.5% (241/331)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 82.1% ( 74/117)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓░░░░░░ 65.5% (295/397)
+| expo-router/babel is deprecated in favor of babel-preset-expo in SDK 50. To fix the issue, remove "expo-router/babel" from "plugins" in your babel.config.js file.
+| expo-router/babel is deprecated in favor of babel-preset-expo in SDK 50. To fix the issue, remove "expo-router/babel" from "plugins" in your babel.config.js file.
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 82.1% (108/143)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓░░░░░░ 65.5% (364/465)
+| expo-router/babel is deprecated in favor of babel-preset-expo in SDK 50. To fix the issue, remove "expo-router/babel" from "plugins" in your babel.config.js file.
+| expo-router/babel is deprecated in favor of babel-preset-expo in SDK 50. To fix the issue, remove "expo-router/babel" from "plugins" in your babel.config.js file.
+| expo-router/babel is deprecated in favor of babel-preset-expo in SDK 50. To fix the issue, remove "expo-router/babel" from "plugins" in your babel.config.js file.
+| expo-router/babel is deprecated in favor of babel-preset-expo in SDK 50. To fix the issue, remove "expo-router/babel" from "plugins" in your babel.config.js file.
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 82.1% (134/169)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓░░░░░ 74.4% (451/579)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 82.1% (134/169)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓░░░░░ 74.4% (460/587)
+| expo-router/babel is deprecated in favor of babel-preset-expo in SDK 50. To fix the issue, remove "expo-router/babel" from "plugins" in your babel.config.js file.
+| expo-router/babel is deprecated in favor of babel-preset-expo in SDK 50. To fix the issue, remove "expo-router/babel" from "plugins" in your babel.config.js file.
+| expo-router/babel is deprecated in favor of babel-preset-expo in SDK 50. To fix the issue, remove "expo-router/babel" from "plugins" in your babel.config.js file.
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 82.1% (223/281)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 89.7% (599/637)
+| expo-router/babel is deprecated in favor of babel-preset-expo in SDK 50. To fix the issue, remove "expo-router/babel" from "plugins" in your babel.config.js file.
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 82.1% (400/532)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 98.5% (679/700)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 82.1% (502/598)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 98.5% (751/909)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 82.1% (570/737)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 98.5% ( 902/1061)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 82.1% (706/977)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 98.5% ( 980/1074)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 82.1% ( 961/1087)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 98.5% (1057/1132)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 89.6% (1134/1198)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 98.5% (1185/1208)
+λ Bundled 64536ms node_modules/expo-router/node/render.js (1273 modules)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 99.9% (1255/1255)
+Web Bundled 66194ms node_modules/expo-router/entry.js (1255 modules)
+λ  WARN  "shadow*" style props are deprecated. Use "boxShadow". 
+λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents 
+λ  WARN  Layout children must be of type Screen, all other children are ignored. To use custom children, create a custom <Layout />. Update Layout Route at: "app/_layout" 
+λ  LOG  Redirect URI: 
+λ Bundled 50ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 1756ms node_modules/expo-router/entry.js (1 module)
+Web node_modules/expo-router/entry.js ▓▓▓▓░░░░░░░░░░░░ 27.2% (279/574)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓░░░░░░░░ 53.1% (668/917)
+λ  WARN  "shadow*" style props are deprecated. Use "boxShadow". 
+λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents 
+λ  WARN  Layout children must be of type Screen, all other children are ignored. To use custom children, create a custom <Layout />. Update Layout Route at: "app/_layout" 
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓░░░░ 78.4% (1006/1136)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 93.0% (1182/1226)
+Web Bundled 16608ms node_modules/expo-router/entry.js (1256 modules)
+ LOG  [web] Logs will appear in the browser console
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+λ Bundled 61ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 1643ms node_modules/expo-router/entry.js (1 module)
+λ  WARN  "shadow*" style props are deprecated. Use "boxShadow". 
+λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents 
+λ  WARN  Layout children must be of type Screen, all other children are ignored. To use custom children, create a custom <Layout />. Update Layout Route at: "app/_layout" 
+λ  LOG  Redirect URI: 
+Web Bundled 38ms node_modules/expo-router/entry.js (1 module)
+λ Bundled 43ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 1653ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+λ  WARN  "shadow*" style props are deprecated. Use "boxShadow". 
+λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents 
+λ  WARN  Layout children must be of type Screen, all other children are ignored. To use custom children, create a custom <Layout />. Update Layout Route at: "app/_layout" 
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+λ Bundled 67ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 1672ms node_modules/expo-router/entry.js (1 module)
+λ  WARN  "shadow*" style props are deprecated. Use "boxShadow". 
+λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents 
+λ  WARN  Layout children must be of type Screen, all other children are ignored. To use custom children, create a custom <Layout />. Update Layout Route at: "app/_layout" 
+λ  LOG  Redirect URI: 
+Web Bundled 43ms node_modules/expo-router/entry.js (1 module)
+λ Bundled 50ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 1630ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+λ  WARN  "shadow*" style props are deprecated. Use "boxShadow". 
+λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents 
+λ  WARN  Layout children must be of type Screen, all other children are ignored. To use custom children, create a custom <Layout />. Update Layout Route at: "app/_layout" 
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+λ Bundled 70ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 1648ms node_modules/expo-router/entry.js (1 module)
+λ  WARN  "shadow*" style props are deprecated. Use "boxShadow". 
+λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents 
+λ  WARN  Layout children must be of type Screen, all other children are ignored. To use custom children, create a custom <Layout />. Update Layout Route at: "app/_layout" 
+λ  LOG  Redirect URI: 
+Web Bundled 38ms node_modules/expo-router/entry.js (1 module)
+λ Bundled 48ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 1621ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+λ  WARN  "shadow*" style props are deprecated. Use "boxShadow". 
+λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents 
+λ  WARN  Layout children must be of type Screen, all other children are ignored. To use custom children, create a custom <Layout />. Update Layout Route at: "app/_layout" 
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+λ Bundled 95ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 1796ms node_modules/expo-router/entry.js (1 module)
+λ  WARN  "shadow*" style props are deprecated. Use "boxShadow". 
+λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents 
+λ  WARN  Layout children must be of type Screen, all other children are ignored. To use custom children, create a custom <Layout />. Update Layout Route at: "app/_layout" 
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 165ms node_modules/expo-router/entry.js (1 module)
+λ Bundled 73ms node_modules/expo-router/node/render.js (1 module)
+λ Bundled 68ms node_modules/expo-router/node/render.js (1 module)
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 3808ms node_modules/expo-router/entry.js (1 module)
+Web Bundled 3377ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+λ  WARN  "shadow*" style props are deprecated. Use "boxShadow". 
+λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents 
+λ  WARN  Layout children must be of type Screen, all other children are ignored. To use custom children, create a custom <Layout />. Update Layout Route at: "app/_layout" 
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 70ms node_modules/expo-router/entry.js (1 module)
+λ  WARN  "shadow*" style props are deprecated. Use "boxShadow". 
+λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents 
+λ  WARN  Layout children must be of type Screen, all other children are ignored. To use custom children, create a custom <Layout />. Update Layout Route at: "app/_layout" 
+λ Bundled 107ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 1836ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+λ Bundled 73ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 3250ms node_modules/expo-router/entry.js (1 module)
+λ Bundled 81ms node_modules/expo-router/node/render.js (1 module)
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 4729ms node_modules/expo-router/entry.js (1 module)
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+λ  WARN  "shadow*" style props are deprecated. Use "boxShadow". 
+λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents 
+λ  WARN  Layout children must be of type Screen, all other children are ignored. To use custom children, create a custom <Layout />. Update Layout Route at: "app/_layout" 
+λ  WARN  "shadow*" style props are deprecated. Use "boxShadow". 
+λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents 
+λ  WARN  Layout children must be of type Screen, all other children are ignored. To use custom children, create a custom <Layout />. Update Layout Route at: "app/_layout" 
+Error: Premature close
+    at onclose (node:internal/streams/end-of-stream:158:30)
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)
+    at runNextTicks (node:internal/process/task_queues:69:3)
+    at processImmediate (node:internal/timers:459:9)
+λ  WARN  "shadow*" style props are deprecated. Use "boxShadow". 
+λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents 
+λ  WARN  Layout children must be of type Screen, all other children are ignored. To use custom children, create a custom <Layout />. Update Layout Route at: "app/_layout" 
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 74ms node_modules/expo-router/entry.js (1 module)
+λ Bundled 100ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 1905ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+λ  WARN  "shadow*" style props are deprecated. Use "boxShadow". 
+λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents 
+λ  WARN  Layout children must be of type Screen, all other children are ignored. To use custom children, create a custom <Layout />. Update Layout Route at: "app/_layout" 
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+λ Bundled 101ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 1824ms node_modules/expo-router/entry.js (1 module)
+λ  WARN  "shadow*" style props are deprecated. Use "boxShadow". 
+λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents 
+λ  WARN  Layout children must be of type Screen, all other children are ignored. To use custom children, create a custom <Layout />. Update Layout Route at: "app/_layout" 
+λ  WARN  "magic" is not a valid icon name for family "material-community" 
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 101ms node_modules/expo-router/entry.js (1 module)
+λ Bundled 80ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 1750ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+λ  WARN  "shadow*" style props are deprecated. Use "boxShadow". 
+λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents 
+λ  WARN  Layout children must be of type Screen, all other children are ignored. To use custom children, create a custom <Layout />. Update Layout Route at: "app/_layout" 

@@ -17,7 +17,38 @@ import {
     ShoppingList,
     Ingredient,
     ApiResponse,
+    DietType,
+    DietaryRestriction,
+    Category,
+    Unit,
+    FodmapCategory,
+    FoodPreference,
+    Tag,
 } from '../types/api';
+
+// Re-export types for convenience
+export type {
+    RegisterResponse,
+    RegisterRequest,
+    LoginResponse,
+    ProfileRequest,
+    ProfileResponse,
+    GoogleSSOResponse,
+    Recipe,
+    RecipeGenerationRequest,
+    RecipeGenerationResponse,
+    UserProfile,
+    ShoppingList,
+    Ingredient,
+    ApiResponse,
+    DietType,
+    DietaryRestriction,
+    Category,
+    Unit,
+    FodmapCategory,
+    FoodPreference,
+    Tag,
+};
 
 // const BASE_API_URL = 'http://10.0.2.2:8000';
 const BASE_API_URL = 'http://127.0.0.1:8000'; // For Android emulator
@@ -62,12 +93,19 @@ const removeAuthToken = async (): Promise<void> => {
 const createAuthConfig = async () => {
     const token = await getAuthToken();
     console.log('Auth token:', token ? 'Present' : 'Missing');
-    return {
-        headers: {
-            'Content-Type': 'application/json',
-            ...(token && { Authorization: `Bearer ${token}` }),
-        },
+    if (token) {
+        console.log('Token length:', token.length);
+        console.log('Token preview:', token.substring(0, 20) + '...');
+    }
+    const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
     };
+    
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+    }
+    
+    return { headers };
 };
 
 // Authentication endpoints
@@ -105,6 +143,7 @@ export async function handleGoogleSignInCallback(
         // Store the token
         if (response.data.token) {
             await setAuthToken(response.data.token);
+            api.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
         }
         
         return response.data;
@@ -128,6 +167,7 @@ export async function loginUser(
         
         if (response.data.access) {
             await setAuthToken(response.data.access);
+            api.defaults.headers.common['Authorization'] = `Bearer ${response.data.access}`;
         }
         
         return response.data;
@@ -142,9 +182,13 @@ export async function logoutUser(): Promise<void> {
         const config = await createAuthConfig();
         await api.post('/auth/logout/', {}, config);
         await removeAuthToken();
+        // Clear axios default headers
+        delete api.defaults.headers.common['Authorization'];
     } catch (error) {
         console.error('Error logging out:', error);
         await removeAuthToken(); // Remove token even if logout fails
+        // Clear axios default headers even if logout fails
+        delete api.defaults.headers.common['Authorization'];
         throw error;
     }
 }
@@ -299,6 +343,94 @@ export async function createShoppingListFromRecipe(recipeId: number): Promise<Sh
         throw error;
     }
 }
+
+export async function getDietTypes(): Promise<DietType[]> {
+    try {
+        const response = await api.get<{ results: DietType[] }>('/api/diet-types/');
+        return response.data.results || response.data as any;
+    } catch (error) {
+        console.error('Error fetching diet types:', error);
+        throw error;
+    }
+}
+
+export async function getDietaryRestrictions(): Promise<DietaryRestriction[]> {
+    try {
+        const response = await api.get<{ results: DietaryRestriction[] }>('/api/dietary-restrictions/');
+        return response.data.results || response.data as any;
+    } catch (error) {
+        console.error('Error fetching dietary restrictions:', error);
+        throw error;
+    }
+}
+
+// Category endpoints
+export async function getCategories(): Promise<Category[]> {
+    try {
+        const response = await api.get<Category[]>('/api/categories/');
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching categories:', error);
+        throw error;
+    }
+}
+
+// Unit endpoints
+export async function getUnits(): Promise<Unit[]> {
+    try {
+        const response = await api.get<Unit[]>('/api/units/');
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching units:', error);
+        throw error;
+    }
+}
+
+// FODMAP Category endpoints
+export async function getFodmapCategories(): Promise<FodmapCategory[]> {
+    try {
+        const response = await api.get<FodmapCategory[]>('/api/fodmap-categories/');
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching FODMAP categories:', error);
+        throw error;
+    }
+}
+
+// Food Preference endpoints
+export async function getFoodPreferences(): Promise<FoodPreference[]> {
+    try {
+        const config = await createAuthConfig();
+        const response = await api.get<FoodPreference[]>('/api/food-preferences/', config);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching food preferences:', error);
+        throw error;
+    }
+}
+
+export async function createFoodPreference(data: { ingredient_id: number; preference: string }): Promise<FoodPreference> {
+    try {
+        const config = await createAuthConfig();
+        const response = await api.post<FoodPreference>('/api/food-preferences/', data, config);
+        return response.data;
+    } catch (error) {
+        console.error('Error creating food preference:', error);
+        throw error;
+    }
+}
+
+// Initialize axios with stored token
+export const initializeAuth = async (): Promise<void> => {
+    try {
+        const token = await getAuthToken();
+        if (token) {
+            api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        }
+    } catch (error) {
+        console.error('Error initializing auth:', error);
+    }
+};
 
 // Utility functions
 export const isAuthenticated = async (): Promise<boolean> => {

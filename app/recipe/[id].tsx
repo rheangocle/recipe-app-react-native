@@ -117,8 +117,8 @@ export default function RecipeDetailScreen() {
             >
                 {/* Recipe Header */}
                 <Card style={styles.headerCard}>
-                    {recipe.image_url && (
-                        <Card.Cover source={{ uri: recipe.image_url }} />
+                    {recipe.image && (
+                        <Card.Cover source={{ uri: recipe.image }} />
                     )}
                     <Card.Content style={styles.headerContent}>
                         <Title style={styles.recipeTitle}>{recipe.title}</Title>
@@ -155,7 +155,7 @@ export default function RecipeDetailScreen() {
                             >
                                 {recipe.difficulty}
                             </Chip>
-                            {recipe.is_fodmap_friendly && (
+                            {recipe.fodmap_friendly && (
                                 <Chip 
                                     icon="check-circle"
                                     style={[styles.metaChip, { backgroundColor: '#4CAF50' }]}
@@ -209,16 +209,16 @@ export default function RecipeDetailScreen() {
                         <Title style={styles.sectionTitle}>Ingredients</Title>
                         <Divider style={styles.divider} />
                         
-                        {recipe.ingredients.map((recipeIngredient, index) => (
+                        {recipe.ingredients_detail.map((recipeIngredient, index) => (
                             <List.Item
                                 key={recipeIngredient.id}
-                                title={`${recipeIngredient.quantity} ${recipeIngredient.unit} ${recipeIngredient.ingredient.name}`}
+                                title={`${recipeIngredient.quantity} ${recipeIngredient.unit?.name || ''} ${recipeIngredient.ingredient.name}`}
                                 description={recipeIngredient.notes}
                                 left={(props) => (
                                     <List.Icon 
                                         {...props} 
                                         icon="circle-small" 
-                                        color={getFodmapColor(recipeIngredient.ingredient.fodmap_level)}
+                                        color={getFodmapColor(recipeIngredient.ingredient.fodmap_category?.name?.toLowerCase() || 'unknown')}
                                     />
                                 )}
                                 right={(props) => (
@@ -227,10 +227,10 @@ export default function RecipeDetailScreen() {
                                         textStyle={{ fontSize: 10 }}
                                         style={[
                                             styles.fodmapChip,
-                                            { borderColor: getFodmapColor(recipeIngredient.ingredient.fodmap_level) }
+                                            { borderColor: getFodmapColor(recipeIngredient.ingredient.fodmap_category?.name?.toLowerCase() || 'unknown') }
                                         ]}
                                     >
-                                        {recipeIngredient.ingredient.fodmap_level}
+                                        {recipeIngredient.ingredient.fodmap_category?.name || 'Unknown'}
                                     </Chip>
                                 )}
                                 style={styles.ingredientItem}
@@ -259,13 +259,13 @@ export default function RecipeDetailScreen() {
                             <Divider style={styles.divider} />
                             
                             <View style={styles.tagsContainer}>
-                                {recipe.tags.map((tag, index) => (
+                                {recipe.tags.map((tag) => (
                                     <Chip 
-                                        key={index} 
+                                        key={tag.id} 
                                         style={styles.tagChip}
                                         mode="outlined"
                                     >
-                                        {tag}
+                                        {tag.name}
                                     </Chip>
                                 ))}
                             </View>

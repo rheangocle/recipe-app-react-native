@@ -93,7 +93,7 @@ export default function GenerateRecipeScreen() {
 
     const addIngredient = (ingredient: Ingredient) => {
         if (!formData.ingredients?.includes(ingredient.name)) {
-            setFormData(prev => ({
+            setFormData((prev: RecipeGenerationRequest) => ({
                 ...prev,
                 ingredients: [...(prev.ingredients || []), ingredient.name]
             }));
@@ -103,26 +103,26 @@ export default function GenerateRecipeScreen() {
     };
 
     const removeIngredient = (ingredientName: string) => {
-        setFormData(prev => ({
+        setFormData((prev: RecipeGenerationRequest) => ({
             ...prev,
-            ingredients: prev.ingredients?.filter(name => name !== ingredientName) || []
+            ingredients: prev.ingredients?.filter((name: string) => name !== ingredientName) || []
         }));
     };
 
     const toggleDietaryRestriction = (restriction: string) => {
-        setFormData(prev => ({
+        setFormData((prev: RecipeGenerationRequest) => ({
             ...prev,
             dietary_restrictions: prev.dietary_restrictions?.includes(restriction)
-                ? prev.dietary_restrictions.filter(r => r !== restriction)
+                ? prev.dietary_restrictions.filter((r: string) => r !== restriction)
                 : [...(prev.dietary_restrictions || []), restriction]
         }));
     };
 
     const togglePreference = (preference: string) => {
-        setFormData(prev => ({
+        setFormData((prev: RecipeGenerationRequest) => ({
             ...prev,
             preferences: prev.preferences?.includes(preference)
-                ? prev.preferences.filter(p => p !== preference)
+                ? prev.preferences.filter((p: string) => p !== preference)
                 : [...(prev.preferences || []), preference]
         }));
     };
@@ -160,9 +160,9 @@ export default function GenerateRecipeScreen() {
             <ScrollView style={styles.scrollView}>
                 <Card style={styles.headerCard}>
                     <Card.Content>
-                        <Title style={styles.headerTitle}>🤖 AI Recipe Generator</Title>
+                        <Title style={styles.headerTitle}>AI Recipe Generator</Title>
                         <Paragraph style={styles.headerSubtitle}>
-                            Generate personalized FODMAP-friendly recipes based on your preferences
+                            Generate tailored FODMAP-friendly recipes based on your preferences
                         </Paragraph>
                     </Card.Content>
                 </Card>
@@ -187,32 +187,32 @@ export default function GenerateRecipeScreen() {
                             <Card style={styles.searchResultsCard}>
                                 <Card.Content>
                                     {searchResults.map((ingredient) => (
-                                        <List.Item
-                                            key={ingredient.id}
-                                            title={ingredient.name}
-                                            description={ingredient.category}
-                                            left={(props) => (
-                                                <List.Icon 
-                                                    {...props} 
-                                                    icon="circle-small" 
-                                                    color={getFodmapColor(ingredient.fodmap_level)}
-                                                />
-                                            )}
-                                            right={(props) => (
-                                                <Chip 
-                                                    mode="outlined" 
-                                                    textStyle={{ fontSize: 10 }}
-                                                    style={[
-                                                        styles.fodmapChip,
-                                                        { borderColor: getFodmapColor(ingredient.fodmap_level) }
-                                                    ]}
-                                                >
-                                                    {ingredient.fodmap_level}
-                                                </Chip>
-                                            )}
-                                            onPress={() => addIngredient(ingredient)}
-                                            style={styles.searchResultItem}
-                                        />
+                                            <List.Item
+                                                key={ingredient.id}
+                                                title={ingredient.name}
+                                                description={ingredient.category?.name || 'Unknown'}
+                                                left={(props) => (
+                                                    <List.Icon 
+                                                        {...props} 
+                                                        icon="circle-small" 
+                                                        color={getFodmapColor(ingredient.fodmap_category?.name?.toLowerCase() || 'unknown')}
+                                                    />
+                                                )}
+                                                right={(props) => (
+                                                    <Chip 
+                                                        mode="outlined" 
+                                                        textStyle={{ fontSize: 10 }}
+                                                        style={[
+                                                            styles.fodmapChip,
+                                                            { borderColor: getFodmapColor(ingredient.fodmap_category?.name?.toLowerCase() || 'unknown') }
+                                                        ]}
+                                                    >
+                                                        {ingredient.fodmap_category?.name || 'Unknown'}
+                                                    </Chip>
+                                                )}
+                                                onPress={() => addIngredient(ingredient)}
+                                                style={styles.searchResultItem}
+                                            />
                                     ))}
                                 </Card.Content>
                             </Card>
@@ -222,13 +222,13 @@ export default function GenerateRecipeScreen() {
                             <View style={styles.selectedIngredients}>
                                 <Text style={styles.selectedTitle}>Selected Ingredients:</Text>
                                 <View style={styles.chipContainer}>
-                                    {formData.ingredients.map((ingredient, index) => (
+                                    {formData.ingredients.map((ingredientName: string, index: number) => (
                                         <Chip
                                             key={index}
-                                            onClose={() => removeIngredient(ingredient)}
+                                            onClose={() => removeIngredient(ingredientName)}
                                             style={styles.selectedChip}
                                         >
-                                            {ingredient}
+                                            {ingredientName}
                                         </Chip>
                                     ))}
                                 </View>
@@ -289,7 +289,7 @@ export default function GenerateRecipeScreen() {
                                     <Chip
                                         key={time}
                                         selected={formData.max_prep_time === time}
-                                        onPress={() => setFormData(prev => ({ ...prev, max_prep_time: time }))}
+                                        onPress={() => setFormData((prev: RecipeGenerationRequest) => ({ ...prev, max_prep_time: time }))}
                                         style={styles.optionChip}
                                         mode="outlined"
                                     >
@@ -308,7 +308,7 @@ export default function GenerateRecipeScreen() {
                                     <Chip
                                         key={servings}
                                         selected={formData.servings === servings}
-                                        onPress={() => setFormData(prev => ({ ...prev, servings }))}
+                                        onPress={() => setFormData((prev: RecipeGenerationRequest) => ({ ...prev, servings }))}
                                         style={styles.optionChip}
                                         mode="outlined"
                                     >
@@ -327,7 +327,7 @@ export default function GenerateRecipeScreen() {
                                     <Chip
                                         key={difficulty}
                                         selected={formData.difficulty === difficulty}
-                                        onPress={() => setFormData(prev => ({ ...prev, difficulty }))}
+                                        onPress={() => setFormData((prev: RecipeGenerationRequest) => ({ ...prev, difficulty: difficulty as 'easy' | 'medium' | 'hard' }))}
                                         style={styles.optionChip}
                                         mode="outlined"
                                     >

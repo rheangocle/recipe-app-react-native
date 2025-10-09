@@ -46,9 +46,12 @@ export default function ExploreScreen() {
         try {
             setLoading(true);
             const fetchedRecipes = await getRecipes();
-            setRecipes(fetchedRecipes);
+            // Ensure we always have an array
+            const recipesArray = Array.isArray(fetchedRecipes) ? fetchedRecipes : [];
+            setRecipes(recipesArray);
         } catch (error) {
             console.error('Error loading recipes:', error);
+            setRecipes([]); // Set empty array on error
         } finally {
             setLoading(false);
         }
@@ -61,14 +64,16 @@ export default function ExploreScreen() {
     };
 
     const filterRecipes = () => {
-        let filtered = recipes;
+        // Ensure recipes is always an array
+        const recipesArray = Array.isArray(recipes) ? recipes : [];
+        let filtered = recipesArray;
 
         // Apply search filter
         if (searchQuery) {
             filtered = filtered.filter(recipe =>
-                recipe.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                recipe.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                recipe.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+                recipe.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                recipe.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                recipe.tags?.some(tag => tag.name?.toLowerCase().includes(searchQuery.toLowerCase()))
             );
         }
 
@@ -76,24 +81,25 @@ export default function ExploreScreen() {
         selectedFilters.forEach(filter => {
             switch (filter) {
                 case 'fodmap-friendly':
-                    filtered = filtered.filter(recipe => recipe.is_fodmap_friendly);
+                    filtered = filtered.filter(recipe => recipe.fodmap_friendly);
                     break;
                 case 'quick':
-                    filtered = filtered.filter(recipe => recipe.prep_time + recipe.cook_time <= 30);
+                    filtered = filtered.filter(recipe => (recipe.prep_time || 0) + (recipe.cook_time || 0) <= 30);
                     break;
                 case 'easy':
-                    filtered = filtered.filter(recipe => recipe.difficulty === 'easy');
+                    // For now, we'll consider recipes with short prep/cook time as easy
+                    filtered = filtered.filter(recipe => (recipe.prep_time || 0) + (recipe.cook_time || 0) <= 20);
                     break;
                 case 'vegetarian':
                     filtered = filtered.filter(recipe => 
-                        recipe.tags.includes('vegetarian') || 
-                        recipe.description.toLowerCase().includes('vegetarian')
+                        recipe.tags?.some(tag => tag.name?.toLowerCase() === 'vegetarian') || 
+                        recipe.description?.toLowerCase().includes('vegetarian')
                     );
                     break;
                 case 'gluten-free':
                     filtered = filtered.filter(recipe => 
-                        recipe.tags.includes('gluten-free') || 
-                        recipe.description.toLowerCase().includes('gluten-free')
+                        recipe.tags?.some(tag => tag.name?.toLowerCase() === 'gluten-free') || 
+                        recipe.description?.toLowerCase().includes('gluten-free')
                     );
                     break;
             }
@@ -110,14 +116,6 @@ export default function ExploreScreen() {
         );
     };
 
-    const getDifficultyColor = (difficulty: string) => {
-        switch (difficulty) {
-            case 'easy': return '#4CAF50';
-            case 'medium': return '#FF9800';
-            case 'hard': return '#F44336';
-            default: return '#757575';
-        }
-    };
 
     const formatTime = (minutes: number) => {
         if (minutes < 60) return `${minutes}m`;
@@ -191,7 +189,7 @@ export default function ExploreScreen() {
                     <Card.Content>
                         <View style={styles.resultsHeader}>
                             <Title style={styles.resultsTitle}>
-                                {filteredRecipes.length} Recipe{filteredRecipes.length !== 1 ? 's' : ''}
+                                {Array.isArray(filteredRecipes) ? filteredRecipes.length : 0} Recipe{Array.isArray(filteredRecipes) && filteredRecipes.length !== 1 ? 's' : ''}
                             </Title>
                             {selectedFilters.length > 0 && (
                                 <Button 
@@ -204,7 +202,7 @@ export default function ExploreScreen() {
                             )}
                         </View>
 
-                        {filteredRecipes.length === 0 ? (
+                        {!Array.isArray(filteredRecipes) || filteredRecipes.length === 0 ? (
                             <View style={styles.emptyState}>
                                 <MaterialCommunityIcons 
                                     name="food-variant-off" 
@@ -228,14 +226,14 @@ export default function ExploreScreen() {
                             </View>
                         ) : (
                             <View style={styles.recipesGrid}>
-                                {filteredRecipes.map((recipe) => (
+                                {(Array.isArray(filteredRecipes) ? filteredRecipes : []).map((recipe) => (
                                     <Card 
                                         key={recipe.id} 
                                         style={styles.recipeCard}
                                         onPress={() => router.push(`/recipe/${recipe.id}`)}
                                     >
-                                        {recipe.image_url && (
-                                            <Card.Cover source={{ uri: recipe.image_url }} />
+                                        {recipe.image && (
+                                            <Card.Cover source={{ uri: recipe.image }} />
                                         )}
                                         <Card.Content style={styles.recipeContent}>
                                             <Title style={styles.recipeTitle} numberOfLines={2}>
@@ -251,19 +249,16 @@ export default function ExploreScreen() {
                                                     style={styles.metaChip}
                                                     textStyle={{ fontSize: 10 }}
                                                 >
-                                                    {formatTime(recipe.prep_time + recipe.cook_time)}
+                                                    {formatTime((recipe.prep_time || 0) + (recipe.cook_time || 0))}
                                                 </Chip>
                                                 <Chip 
-                                                    icon="star"
-                                                    style={[
-                                                        styles.metaChip,
-                                                        { backgroundColor: getDifficultyColor(recipe.difficulty) }
-                                                    ]}
-                                                    textStyle={{ color: 'white', fontSize: 10 }}
+                                                    icon="account-group"
+                                                    style={styles.metaChip}
+                                                    textStyle={{ fontSize: 10 }}
                                                 >
-                                                    {recipe.difficulty}
+                                                    {recipe.servings || 1} serving{(recipe.servings || 1) !== 1 ? 's' : ''}
                                                 </Chip>
-                                                {recipe.is_fodmap_friendly && (
+                                                {recipe.fodmap_friendly && (
                                                     <Chip 
                                                         icon="check-circle"
                                                         style={[styles.metaChip, { backgroundColor: '#4CAF50' }]}

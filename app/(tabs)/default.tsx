@@ -181,10 +181,10 @@ export default function HomeScreen() {
                                                     {recipe.description}
                                                 </Paragraph>
                                             </View>
-                                            {recipe.image_url && (
+                                            {recipe.image && (
                                                 <Avatar.Image 
                                                     size={60} 
-                                                    source={{ uri: recipe.image_url }} 
+                                                    source={{ uri: recipe.image }} 
                                                 />
                                             )}
                                         </View>
@@ -212,7 +212,7 @@ export default function HomeScreen() {
                                             >
                                                 {recipe.difficulty}
                                             </Chip>
-                                            {recipe.is_fodmap_friendly && (
+                                            {recipe.fodmap_friendly && (
                                                 <Chip 
                                                     icon="check-circle"
                                                     style={[styles.metaChip, { backgroundColor: '#4CAF50' }]}

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { isAuthenticated, getUserProfile } from '../services/api';
+import { isAuthenticated, getUserProfile, initializeAuth } from '../services/api';
 import { UserProfile } from '../types/api';
 
 interface AuthContextType {
@@ -36,6 +36,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const checkAuthStatus = async () => {
         try {
             setLoading(true);
+            // Initialize axios with stored token
+            await initializeAuth();
             const authenticated = await isAuthenticated();
             if (authenticated) {
                 const userProfile = await getUserProfile();
